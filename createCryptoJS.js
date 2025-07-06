@@ -1,5 +1,5 @@
 //Crypto-JS库
-function createCryptoJS() {
+this.createCryptoJS = function() {
     var t, e, r, i, n, o, s, a, c = c || function (t, e) {
         var r;
         if ("undefined" != typeof window && window.crypto && (r = window.crypto),
