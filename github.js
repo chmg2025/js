@@ -18,7 +18,7 @@ open= switch,false,tag=开关,desc=
 time = input,"35 * * * *",tag=Cron时间,desc=cron表达式
 
 [Script]
-cron {time} script-path=data-github-upload.js, timeout=60, img-url=https://raw.githubusercontent.com/fishdown/Icon/master/app/github.png,enable={open},tag=Github上传文件, argument=[{text},{owner},{repo},{path},{branch},{ghToken}]
+cron {time} script-path=https://raw.githubusercontent.com/chmg2025/js/refs/heads/main/github.js, timeout=60, img-url=https://raw.githubusercontent.com/fishdown/Icon/master/app/github.png,enable={open},tag=Github上传文件, argument=[{text},{owner},{repo},{path},{branch},{ghToken}]
 */
 // 本js文件，plugins,scripts 都放，直接添加本地插件，data-github-upload.js
 // 本地文件，可以在[Argument]预设自己的input，input后面双引号内，token建议在ui界面输入
