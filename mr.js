@@ -26,8 +26,9 @@ let rules = [
         domains: [
             '7yhgyt.com',
             'dcbq5bzkxtk8q.cloudfront.net',
-            'd1orururfggatt.cloudfront.net,
-            'd2d03hqzmqybra.cloudfront.net'
+            'd1orururfggatt.cloudfront.net',
+            'd2d03hqzmqybra.cloudfront.net',
+            'dpa1uunqzg4g8.cloudfront.net'
         ]
     },
     {
