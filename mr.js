@@ -2,7 +2,8 @@ let 网址列表 = {
     'Mr先生': 'https://d2kz22zwxc5env.cloudfront.net/',
     'xvideos社区': 'https://dlqrowpypqqsg.cloudfront.net/',
     '泡芙短视频': 'https://pfhfzs.com/',
-    'tiktok免费版':'https://d19m5x9olndkrb.cloudfront.net/'
+    'tiktok免费版':'https://d19m5x9olndkrb.cloudfront.net/',
+    '你好学妹':'https://d3donedewg3ohi.cloudfront.net'
 }
 
 if ($request.method === 'OPTIONS') {
@@ -76,6 +77,19 @@ let rules = [
             'g7926j.com'
         ]
     },
+    {
+        name: '你好学妹',
+        key: [
+           53, 114, 115,  49, 104, 122, 121, 108,
+           98, 102,  99, 118, 116,  50, 117, 102,
+          106,  52,  57,  48, 110, 103,  53,  99,
+          113, 120, 108, 121, 121,  52,  54, 106
+        ]
+        ,
+        domains: [
+            'd3donedewg3ohi.cloudfront.net/',
+        ]
+    }
 ];
 
 // 先用配置查找是否匹配某个规则
