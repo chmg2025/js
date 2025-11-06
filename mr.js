@@ -87,6 +87,7 @@ let rules = [
         ],
         domains: [
             'd3donedewg3ohi.cloudfront.net',
+            'dgs6xidvwkva6.cloudfront.net'
         ]
     }
 ];
