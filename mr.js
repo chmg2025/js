@@ -3,7 +3,7 @@ let 网址列表 = {
     'xvideos社区': 'https://dlqrowpypqqsg.cloudfront.net/',
     '泡芙短视频': 'https://pfhfzs.com/',
     'tiktok免费版':'https://d19m5x9olndkrb.cloudfront.net/',
-    '你好学妹':'https://d3donedewg3ohi.cloudfront.net'
+    '你好学妹':'https://d2qo9vjr4u9n2v.cloudfront.net/'
 }
 
 if ($request.method === 'OPTIONS') {
