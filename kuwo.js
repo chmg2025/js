@@ -81,7 +81,7 @@ loadEnvAndRun(function () {
 
   // ===== 路由表 =====
   var dispatch = router([
-    { pattern: /vip\/enc\/user\/vip\?op=ui/,    name: "vip_enc",   handler: vipencHandler },
+    { pattern: "vip/enc/user/vip",    name: "vip_enc",   handler: vipencHandler },
     // { pattern: /something/, name: "req_mod", handler: modifyRequest },
   ], { logger: logger });
 
