@@ -45,7 +45,7 @@ loadEnvAndRun(function () {
   logger.log("脚本启动", { mode: mode });
 
   // 取当前场景的 url 和 body
-  var url  = IS_RESPONSE ? $response.url  : $request.url;
+  var url  = $request.url;
   var body = IS_RESPONSE ? $response.body : $request.body;
 
   // ===== 通用解密处理器（response 场景） =====
