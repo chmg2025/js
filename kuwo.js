@@ -5,7 +5,7 @@ var CACHE_KEY = "kw_env_cache";
 // ==================== 环境检测 ====================
 var ENV_TYPE = typeof $task !== "undefined" ? "QX" :
                typeof $loon  !== "undefined" ? "Loon" :
-               typeof $httpClient !== "undefined" ? "Surge" : "Node";
+               typeof $httpClient !== "undefined" ? "Surge" : "Egern";
 
 function _envRead(key) {
   try { return ENV_TYPE === "QX" ? $prefs.valueForKey(key) : $persistentStore.read(key); }
