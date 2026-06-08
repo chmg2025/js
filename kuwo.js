@@ -42,7 +42,7 @@ loadEnvAndRun(function () {
 
   var logger = createLogger("kw_music");
   var mode = IS_RESPONSE ? "response" : "request";
-  logger.log("脚本启动", { mode: mode });
+  logger.log("脚本启动");
 
   // 取当前场景的 url 和 body
   var url  = $request.url;
@@ -50,9 +50,9 @@ loadEnvAndRun(function () {
 
   // ===== 通用解密处理器（response 场景） =====
   function vipencHandler(ctx) {
-    if (!ctx.body) { ctx.logger.log("空响应体"); $done({}); return; }
+    if (!ctx.body) { ctx.logger.log("无响应体"); $done({}); return; }
 
-    ctx.logger.log("处理响应", { len: ctx.body.length });
+    ctx.logger.log("处理响应");
     http({
       url: "https://kuwo.chmg2025.ip-ddns.com/",
       method: "POST",
@@ -62,7 +62,7 @@ loadEnvAndRun(function () {
       function (resp) {
         var r = JSON.parse(resp.body);
         if (r.code === 200) {
-          ctx.logger.log("处理成功", { outLen: r.data.length });
+          ctx.logger.log("处理成功");
           $done({ body: r.data });
         } else {
           ctx.logger.log("处理失败: " + r.error);
