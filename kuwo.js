@@ -1,9 +1,8 @@
 // ==================== 配置 ====================
-var ENV_URL   = "https://raw.githubusercontent.com/chmg2025/js/refs/heads/main/env.js";          // ← env.js 公网地址
-var WORKER    = "https://kuwo.chmg2025.ip-ddns.com";       // ← CF Worker 地址
+var ENV_URL   = "https://raw.githubusercontent.com/chmg2025/js/refs/heads/main/env.js";          
 var CACHE_KEY = "kw_env_cache";
 
-// ==================== 环境检测（最小化，不依赖 env.js） ====================
+// ==================== 环境检测 ====================
 var ENV_TYPE = typeof $task !== "undefined" ? "QX" :
                typeof $loon  !== "undefined" ? "Loon" :
                typeof $httpClient !== "undefined" ? "Surge" : "Node";
@@ -20,7 +19,7 @@ function _envWrite(key, val) {
 // 判断当前是 response 还是 request 脚本
 var IS_RESPONSE = typeof $response !== "undefined";
 
-// ==================== env.js 加载 ====================
+// ==================== 加载 ENV ====================
 function loadEnvAndRun(callback) {
   var cached = _envRead(CACHE_KEY);
   if (cached) { (0, eval)(cached); callback(); return; }
@@ -55,7 +54,7 @@ loadEnvAndRun(function () {
 
     ctx.logger.log("处理响应", { len: ctx.body.length });
     http({
-      url: WORKER + "/",
+      url: "https://kuwo.chmg2025.ip-ddns.com/",
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ data: ctx.body })
