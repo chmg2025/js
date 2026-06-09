@@ -30,16 +30,16 @@ function loadEnvAndRun(callback) {
   var cached = _envRead(CACHE_KEY);
   if (cached) { (0, eval)(cached); callback(); return; }
 
-  console.log("→ [kw_music] 首次加载 env.js，远程拉取中...");
+  console.log("[kw_music] → 首次加载 env.js，远程拉取中...");
   if (ENV_TYPE === "QX") {
     $task.fetch({ url: ENV_URL }).then(
       function (resp) { _envWrite(CACHE_KEY, resp.body); (0, eval)(resp.body); callback(); },
-      function (err) { console.log("→ [kw_music] env.js 拉取失败: " + (err.error || err)); $done({}); }
+      function (err) { console.log("[kw_music] → env.js 拉取失败: " + (err.error || err)); $done({}); }
     );
     return;
   }
   $httpClient.get({ url: ENV_URL }, function (err, resp, data) {
-    if (err || !data) { console.log("→ [kw_music] env.js 拉取失败: " + (err || "empty")); $done({}); return; }
+    if (err || !data) { console.log("[kw_music] → env.js 拉取失败: " + (err || "empty")); $done({}); return; }
     _envWrite(CACHE_KEY, data); (0, eval)(data); callback();
   });
 }
@@ -49,7 +49,7 @@ loadEnvAndRun(function () {
   var logger = createLogger("kw_music");
   var mode = IS_RESPONSE ? "response" : "request";
   logger.log("→ 脚本启动");
-
+  logger.log("→" + mode)
   // 取当前场景的 url 和 body
   var url  = $request.url;
   var body = IS_RESPONSE ? $response.body : $request.body;
