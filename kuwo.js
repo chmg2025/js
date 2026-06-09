@@ -30,16 +30,16 @@ function loadEnvAndRun(callback) {
   var cached = _envRead(CACHE_KEY);
   if (cached) { (0, eval)(cached); callback(); return; }
 
-  console.log("[kw_music] 首次加载 env.js，远程拉取中...");
+  console.log("→ [kw_music] 首次加载 env.js，远程拉取中...");
   if (ENV_TYPE === "QX") {
     $task.fetch({ url: ENV_URL }).then(
       function (resp) { _envWrite(CACHE_KEY, resp.body); (0, eval)(resp.body); callback(); },
-      function (err) { console.log("[kw_music] env.js 拉取失败: " + (err.error || err)); $done({}); }
+      function (err) { console.log("→ [kw_music] env.js 拉取失败: " + (err.error || err)); $done({}); }
     );
     return;
   }
   $httpClient.get({ url: ENV_URL }, function (err, resp, data) {
-    if (err || !data) { console.log("[kw_music] env.js 拉取失败: " + (err || "empty")); $done({}); return; }
+    if (err || !data) { console.log("→ [kw_music] env.js 拉取失败: " + (err || "empty")); $done({}); return; }
     _envWrite(CACHE_KEY, data); (0, eval)(data); callback();
   });
 }
@@ -48,7 +48,7 @@ loadEnvAndRun(function () {
 
   var logger = createLogger("kw_music");
   var mode = IS_RESPONSE ? "response" : "request";
-  logger.log("脚本启动");
+  logger.log("→ 脚本启动");
 
   // 取当前场景的 url 和 body
   var url  = $request.url;
@@ -56,7 +56,7 @@ loadEnvAndRun(function () {
 
   // ===== 通用解密处理器（response 场景） =====
   function vipEncHandler(ctx) {
-    if (!ctx.body) { ctx.logger.log("无响应体"); $done({}); return; }
+    if (!ctx.body) { ctx.logger.log("→ 无响应体"); $done({}); return; }
     http({
       url: "https://kuwo.chmg2025.ip-ddns.com/",
       method: "POST",
@@ -69,19 +69,19 @@ loadEnvAndRun(function () {
           
           $done({ body: r.data });
         } else {
-          ctx.logger.log("处理失败: " + r.error);
+          ctx.logger.log("→ 处理失败: " + r.error);
           $done({});
         }
       },
       function (err) {
-        ctx.logger.log("网络不可达: " + (err.message || err));
+        ctx.logger.log("→ 网络不可达: " + (err.message || err));
         $done({});
       }
     );
   }
 
   function musicPayHandler(ctx) {
-    if (!ctx.body) { ctx.logger.log("无响应体"); $done({}); return; }
+    if (!ctx.body) { ctx.logger.log("→ 无响应体"); $done({}); return; }
     if (mode === 'request') {
       const quality = ctx.body.split('quality=')[1]?.split('&')[0];
       const rid = body.split('ids=')[1]?.split('&')[0];
@@ -104,7 +104,7 @@ loadEnvAndRun(function () {
     $done({body:JSON.stringify(data)})
   }
   function musicPlayHandler(ctx){
-    if (!ctx.body) { ctx.logger.log("无响应体"); $done({}); return; }
+    if (!ctx.body) { ctx.logger.log("→ 无响应体"); $done({}); return; }
     const data = JSON.parse(ctx.body)
     if (data && data.data) {
       $done({body:JSON.stringify(data)})
@@ -116,7 +116,7 @@ loadEnvAndRun(function () {
           $done({ body: resp.body });
         },
         function (err) {
-          ctx.logger.log("网络不可达: " + (err.message || err));
+          ctx.logger.log("→ 网络不可达: " + (err.message || err));
           $done({});
         }
       )
