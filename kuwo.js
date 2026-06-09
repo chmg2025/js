@@ -1,7 +1,13 @@
 // ==================== 配置 ====================
 var ENV_URL   = "https://raw.githubusercontent.com/chmg2025/js/refs/heads/main/env.js";          
 var CACHE_KEY = "kw_env_cache";
-
+// 音质映射规则
+const QUALITY_RULES = {
+  'ZP': { audio: '2000kflac', text: '至臻音质2.0' },
+  'F': { audio: '2000kflac', text: '无损音质' },
+  'S': { audio: '320kmp3', text: '超品音质' },
+  'H': { audio: '128kmp3', text: '高品音质' }
+};
 // ==================== 环境检测 ====================
 var ENV_TYPE = typeof $task !== "undefined" ? "QX" :
                typeof $loon  !== "undefined" ? "Loon" :
@@ -49,10 +55,8 @@ loadEnvAndRun(function () {
   var body = IS_RESPONSE ? $response.body : $request.body;
 
   // ===== 通用解密处理器（response 场景） =====
-  function vipencHandler(ctx) {
+  function vipEncHandler(ctx) {
     if (!ctx.body) { ctx.logger.log("无响应体"); $done({}); return; }
-
-    ctx.logger.log("处理响应");
     http({
       url: "https://kuwo.chmg2025.ip-ddns.com/",
       method: "POST",
@@ -62,7 +66,7 @@ loadEnvAndRun(function () {
       function (resp) {
         var r = JSON.parse(resp.body);
         if (r.code === 200) {
-          ctx.logger.log("处理成功");
+          
           $done({ body: r.data });
         } else {
           ctx.logger.log("处理失败: " + r.error);
@@ -76,12 +80,58 @@ loadEnvAndRun(function () {
     );
   }
 
+  function musicPayHandler(ctx) {
+    if (!ctx.body) { ctx.logger.log("无响应体"); $done({}); return; }
+    if (mode === 'request') {
+      const quality = ctx.body.split('quality=')[1]?.split('&')[0];
+      const rid = body.split('ids=')[1]?.split('&')[0];
+      const rule = QUALITY_RULES[quality] || { audio: CONSTANTS.DEFAULT_QUALITY, text: CONSTANTS.DEFAULT_QUALITY_TEXT };
+      _envWrite('Music_Rid', rid);
+      _envWrite('Music_Quality', rule.audio);
+      _envWrite('Music_Qualityb', rule.text);
+      $done({})
+    } else {
+      const data = JSON.parse(ctx.body)
+      if (data.songs && data.songs[0] && data.songs[0].audio) {
+        data.songs[0].audio.forEach((item) => (item.st = 0));
+      }
+      data.songs[0].mp3Download = {
+        couponNum: 998,
+        isSVip: 1,
+        isShow: 1
+      };
+    }
+    $done({body:JSON.stringify(data)})
+  }
+  function musicPlayHandler(ctx){
+    if (!ctx.body) { ctx.logger.log("无响应体"); $done({}); return; }
+    const data = JSON.parse(ctx.body)
+    if (data && data.data) {
+      $done({body:JSON.stringify(data)})
+    } else {
+      const str = `surl=1&user=User&source=kwplayercar_ar_6.0.0.9_B_jiakong_vh.apk&type=convert_url_with_sign&br=${_envRead(Music_Quality)}&rid=${_envRead(Music_Rid)}`;
+      const URL = 'https://nmobi.kuwo.cn/mobi.s?f=web&' + str;
+      http(URL).then(
+        function (resp) {
+          $done({ body: resp.body });
+        } else {
+          ctx.logger.log("处理失败: " + r.error);
+          $done({});
+        },
+        function (err) {
+          ctx.logger.log("网络不可达: " + (err.message || err));
+          $done({});
+        }
+      )
+    }
+  }
   
 
   // ===== 路由表 =====
   var dispatch = router([
-    { pattern: "vip/enc/user/vip",    name: "vip_enc",   handler: vipencHandler },
-    { pattern: "/music/pay",    name: "music_pay",   handler: vipencHandler },
+    { pattern: "/vip/enc/user/vip",    name: "vip_enc",   handler: vipEncHandler },
+    { pattern: "/music/pay",    name: "music_pay",   handler: musicPayHandler },
+    { pattern: "/mobi.s?f=kwxs",    name: "music_pay",   handler: musicPlayHandler },
   ], { logger: logger });
 
   dispatch(url, body);
