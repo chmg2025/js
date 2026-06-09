@@ -127,8 +127,8 @@ loadEnvAndRun(function () {
   // ===== 路由表 =====
   var dispatch = router([
     { pattern: "/vip/enc/user/vip",    name: "vip_enc",   handler: vipEncHandler },
-    { pattern: "/music/pay",    name: "music_pay",   handler: musicPayHandler },
-    { pattern: "/mobi.s?f=kwxs",    name: "music_pay",   handler: musicPlayHandler },
+    { pattern: "/music.pay?newver",    name: "music_pay",   handler: musicPayHandler },
+    { pattern: "/mobi.s?f=kwxs",    name: "music_play",   handler: musicPlayHandler },
   ], { logger: logger });
 
   dispatch(url, body);
