@@ -49,7 +49,7 @@ loadEnvAndRun(function () {
   var logger = createLogger("kw_music");
   var mode = IS_RESPONSE ? "response" : "request";
   logger.log("→ 脚本启动");
-  logger.log("→" + mode)
+  logger.log("→ " + mode)
   // 取当前场景的 url 和 body
   var url  = $request.url;
   var body = IS_RESPONSE ? $response.body : $request.body;
@@ -82,15 +82,7 @@ loadEnvAndRun(function () {
 
   function musicPayHandler(ctx) {
     if (!ctx.body) { ctx.logger.log("→ 无响应体"); $done({}); return; }
-    if (mode === 'request') {
-      const quality = ctx.body.split('quality=')[1]?.split('&')[0];
-      const rid = body.split('ids=')[1]?.split('&')[0];
-      const rule = QUALITY_RULES[quality] || { audio: CONSTANTS.DEFAULT_QUALITY, text: CONSTANTS.DEFAULT_QUALITY_TEXT };
-      _envWrite('Music_Rid', rid);
-      _envWrite('Music_Quality', rule.audio);
-      _envWrite('Music_Qualityb', rule.text);
-      $done({})
-    } else {
+    if (mode === 'response'){
       const data = JSON.parse(ctx.body)
       if (data.songs && data.songs[0] && data.songs[0].audio) {
         data.songs[0].audio.forEach((item) => (item.st = 0));
@@ -100,9 +92,18 @@ loadEnvAndRun(function () {
         isSVip: 1,
         isShow: 1
       };
-    }
-    $done({body:JSON.stringify(data)})
+       $done({body:JSON.stringify(data)})
+    } else {
+      const quality = ctx.body.split('quality=')[1]?.split('&')[0];
+      const rid = body.split('ids=')[1]?.split('&')[0];
+      const rule = QUALITY_RULES[quality] || { audio: CONSTANTS.DEFAULT_QUALITY, text: CONSTANTS.DEFAULT_QUALITY_TEXT };
+      _envWrite('Music_Rid', rid);
+      _envWrite('Music_Quality', rule.audio);
+      _envWrite('Music_Qualityb', rule.text);
+      $done({})
+    } 
   }
+  
   function musicPlayHandler(ctx){
     if (!ctx.body) { ctx.logger.log("→ 无响应体"); $done({}); return; }
     const data = JSON.parse(ctx.body)
