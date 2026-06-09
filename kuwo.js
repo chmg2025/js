@@ -52,7 +52,12 @@ loadEnvAndRun(function () {
   logger.log("→ " + mode)
   // 取当前场景的 url 和 body
   var url  = $request.url;
-  var body = IS_RESPONSE ? $response.body : $request.body;
+  let body;
+  if (mode === 'response') {
+    body = $response.body
+  } else {
+    body = $resquest.body
+  }
 
   // ===== 通用解密处理器（response 场景） =====
   function vipEncHandler(ctx) {
@@ -127,9 +132,9 @@ loadEnvAndRun(function () {
 
   // ===== 路由表 =====
   var dispatch = router([
-    { pattern: "/vip/enc/user/vip",    name: "vip_enc",   handler: vipEncHandler },
-    { pattern: "/music.pay?newver",    name: "music_pay",   handler: musicPayHandler },
-    { pattern: "/mobi.s?f=kwxs",    name: "music_play",   handler: musicPlayHandler },
+    { pattern: "/vip/enc/user/vip",   handler: vipEncHandler },
+    { pattern: "/music.pay?newver",   handler: musicPayHandler },
+    { pattern: "/mobi.s?f=kwxs",      handler: musicPlayHandler },
   ], { logger: logger });
 
   dispatch(url, body);
