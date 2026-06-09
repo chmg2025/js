@@ -100,7 +100,7 @@ loadEnvAndRun(function () {
        $done({body:JSON.stringify(data)})
     } else {
       const quality = ctx.body.split('quality=')[1]?.split('&')[0];
-      const rid = body.split('ids=')[1]?.split('&')[0];
+      const rid = ctx.body.split('ids=')[1]?.split('&')[0];
       const rule = QUALITY_RULES[quality] || { audio: CONSTANTS.DEFAULT_QUALITY, text: CONSTANTS.DEFAULT_QUALITY_TEXT };
       _envWrite('Music_Rid', rid);
       _envWrite('Music_Quality', rule.audio);
