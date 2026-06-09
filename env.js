@@ -119,7 +119,7 @@ function router(rules, opts) {
       var ctx = { url: url, body: body, name: "default", logger: logger, http: http, notify: notify, $response: $response, $request: $request, $done: $done };
       return defaultHandler(ctx);
     }
-    if (logger) logger.log("无匹配路由", { url: url });
+    if (logger) logger.log("→ 无匹配路由", { url: url });
     $done({});
   };
 }
