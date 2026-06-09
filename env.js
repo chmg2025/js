@@ -109,7 +109,7 @@ function router(rules, opts) {
         var ctx = {
           url: url, body: body, name: rule.name, logger: logger,
           http: http, notify: notify,
-          $response: $response, $request: $request, $done: $done
+          $done: $done
         };
         const urlObj = new URL(url);
         if (logger) logger.log("→ [" + urlObj.pathname + "]");
@@ -117,7 +117,7 @@ function router(rules, opts) {
       }
     }
     if (defaultHandler) {
-      var ctx = { url: url, body: body, name: "default", logger: logger, http: http, notify: notify, $response: $response, $request: $request, $done: $done };
+      var ctx = { url: url, body: body, name: "default", logger: logger, http: http, notify: notify, $done: $done };
       return defaultHandler(ctx);
     }
     if (logger) logger.log("→ 无匹配路由", { url: url });
