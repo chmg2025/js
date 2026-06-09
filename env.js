@@ -112,7 +112,7 @@ function router(rules, opts) {
           $response: $response, $request: $request, $done: $done
         };
         const urlObj = new URL(url);
-        if (logger) logger.log("→ [" + rule.name + "]", { path: urlObj.pathname });
+        if (logger) logger.log("→ [" + urlObj.pathname + "]");
         return rule.handler(ctx);
       }
     }
