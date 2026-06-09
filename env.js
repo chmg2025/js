@@ -111,7 +111,8 @@ function router(rules, opts) {
           http: http, notify: notify,
           $response: $response, $request: $request, $done: $done
         };
-        if (logger) logger.log("→ [" + rule.name + "]", { url: url });
+        const urlObj = new URL(url);
+        if (logger) logger.log("→ [" + rule.name + "]", { path: urlObj.pathname });
         return rule.handler(ctx);
       }
     }
