@@ -56,7 +56,7 @@ loadEnvAndRun(function () {
   if (mode === 'response') {
     body = $response.body
   } else {
-    body = $resquest.body
+    body = $request.body
   }
 
   // ===== 通用解密处理器（response 场景） =====
