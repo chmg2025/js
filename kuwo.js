@@ -109,14 +109,11 @@ loadEnvAndRun(function () {
     if (data && data.data) {
       $done({body:JSON.stringify(data)})
     } else {
-      const str = `surl=1&user=User&source=kwplayercar_ar_6.0.0.9_B_jiakong_vh.apk&type=convert_url_with_sign&br=${_envRead(Music_Quality)}&rid=${_envRead(Music_Rid)}`;
+      const str = `surl=1&user=chmg2025&source=kwplayercar_ar_6.0.0.9_B_jiakong_vh.apk&type=convert_url_with_sign&br=${_envRead(Music_Quality)}&rid=${_envRead(Music_Rid)}`;
       const URL = 'https://nmobi.kuwo.cn/mobi.s?f=web&' + str;
       http(URL).then(
         function (resp) {
           $done({ body: resp.body });
-        } else {
-          ctx.logger.log("处理失败: " + r.error);
-          $done({});
         },
         function (err) {
           ctx.logger.log("网络不可达: " + (err.message || err));
