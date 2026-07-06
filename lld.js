@@ -1,4 +1,4 @@
-
+let url = $request.url
 let body = JSON.parse($response.body)
 let OPEN_AD = '/api/newstartad.php'
 let PAGE_AD = '/api/setapp.php'
