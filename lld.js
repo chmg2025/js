@@ -35,7 +35,7 @@ if (url.indexOf(VIP) !== -1) {
 if (url.indexOf(PAY) !== -1) {
     body.user.diamonds = '9999'
     body.user.money = '8888'
-    body.username = '联合国儿童基金会'
+    body.user.name = '联合国儿童基金会'
     console.log('解锁金币')
 }
 if (url.indexOf(PLAY) !== -1) {
