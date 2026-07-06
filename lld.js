@@ -1,4 +1,4 @@
-let url = $request.url
+
 let body = JSON.parse($response.body)
 let OPEN_AD = '/api/newstartad.php'
 let PAGE_AD = '/api/setapp.php'
@@ -35,7 +35,6 @@ if (url.indexOf(VIP) !== -1) {
 if (url.indexOf(PAY) !== -1) {
     body.user.diamonds = '9999'
     body.user.money = '8888'
-    body.user.name = '小白破解'
     console.log('解锁金币')
 }
 if (url.indexOf(PLAY) !== -1) {
