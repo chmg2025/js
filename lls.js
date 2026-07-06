@@ -1,4 +1,4 @@
-let body = JSON.parse($.response.body)
+let body = JSON.parse($response.body)
 body.Data.price = 0
 body.Data.isVip = true
 body.Data.videoInfo.gold = 0
