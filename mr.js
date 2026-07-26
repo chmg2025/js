@@ -29,7 +29,8 @@ let rules = [
             'dcbq5bzkxtk8q.cloudfront.net',
             'd1orururfggatt.cloudfront.net',
             'd2d03hqzmqybra.cloudfront.net',
-            'dpa1uunqzg4g8.cloudfront.net'
+            'dpa1uunqzg4g8.cloudfront.net',
+            'dxulz50c2x0pp.cloudfront.net'
         ]
     },
     {
