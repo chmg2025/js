@@ -30,8 +30,6 @@ let rules = [
             'd1orururfggatt.cloudfront.net',
             'd2d03hqzmqybra.cloudfront.net',
             'dpa1uunqzg4g8.cloudfront.net',
-            'dxulz50c2x0pp.cloudfront.net',
-            'd2tw9uw5rogvdw.cloudfront.net'
         ]
     },
     {
@@ -62,7 +60,9 @@ let rules = [
             'd27nudycn51u9q.cloudfront.net',
             'd2m18pn7x0p3im.cloudfront.net',
             'd2wc1l1qxurg5t.cloudfront.net',
-            'd2wexzpo1hxhi0.cloudfront.net'
+            'd2wexzpo1hxhi0.cloudfront.net'，
+            'dxulz50c2x0pp.cloudfront.net',
+            'd2tw9uw5rogvdw.cloudfront.net'
         ]
     },
     {
